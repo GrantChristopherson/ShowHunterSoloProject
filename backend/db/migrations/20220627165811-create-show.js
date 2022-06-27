@@ -29,11 +29,8 @@ module.exports = {
       },
       showCreatorId: {
         type: Sequelize.INTEGER,
-        allowNull: false
-        references: {
-          model: "Users",
-          key: "id"
-        }
+        allowNull: false,
+        references: { model: "Users" }
       },
       showTicketId: {
         type: Sequelize.INTEGER,

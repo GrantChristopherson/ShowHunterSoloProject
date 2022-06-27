@@ -2,34 +2,37 @@
 module.exports = (sequelize, DataTypes) => {
   const Show = sequelize.define('Show', {
     bandName: {
-      DataTypes.STRING(75),
+      type: DataTypes.STRING(75),
       allowNull: false
     },
     venue: {
-      DataTypes.STRING(75),
+      type: DataTypes.STRING(75),
       allowNull: false
     },
     location: {
-      DataTypes.STRING(150),
+      type: DataTypes.STRING(150),
       allowNull: false
     },
     showDate: {
-      DataTypes.STRING(30),
+      type: DataTypes.STRING(30),
       allowNull: false
     },
     about: {
-      DataTypes.TEXT(500)
+      type: DataTypes.TEXT(500)
     },
     showCreatorId: {
-      DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     showTicketId: {
-      DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
+    }
   }, {});
   Show.associate = function(models) {
     // associations can be defined here
+    Show.hasMany(models.Ticket, { foreignKey: 'showId' });
+    Show.belongsTo(models.User, { foreignKey: 'showTicketId'})
   };
   return Show;
 };
