@@ -16,25 +16,32 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <div className="nav-right">
+        <ProfileButton user={sessionUser} />
+      </div>
     );
   } else {
     sessionLinks = (
-      <>
+      <div className="nav-right">
         <LoginFormModal />
         <NavLink to="/signup">Sign Up</NavLink>
-      </>
+      </div>
     );
   }
 
   
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <div className="nav-bar">
+      <div className="nav-bar-text">
+        <ul>
+          <li>
+            <NavLink exact to="/">Home</NavLink>
+            <h1 className="brand">ShowHunt</h1>
+            {isLoaded && sessionLinks}
+          </li>
+        </ul>
+      </div>
+    </div>
   );
 }
 

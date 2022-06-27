@@ -1,3 +1,4 @@
+
 #modal {
   position: fixed;
   top: 0;
@@ -19,6 +20,8 @@
 }
 
 #modal-content {
-  position: absolute;
+  position: fixed;
   background-color:white;
+  height: 70%;
+  width: 35%;
 }
