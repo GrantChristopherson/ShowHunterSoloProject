@@ -1,4 +1,5 @@
 const express = require('express');
+//const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 const csurf = require('csurf');
@@ -7,14 +8,20 @@ const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
 
 const routes = require('./routes');
-const { environment } = require('./config');
+
+// local modules
+const { sequelize } = require('./db/models');
+// const showsApiRouter = require('./routes/api/shows');
+// const ticketsApiRouter = require('./routes/api/tickets');
+const { environment, jwtConfig } = require('./config');
 const isProduction = environment === 'production';
 
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cookieParser());
 app.use(express.json());
+app.use(cookieParser(jwtConfig.secret));  //added jwtConfig.secret ???
+
 
                   // Security Middleware cors, helmet, csurf
 if (!isProduction) {
@@ -32,12 +39,16 @@ app.use(          // Set the _csrf token and create req.csrfToken method
     cookie: {
       secure: isProduction,
       sameSite: isProduction && "Lax",
-      httpOnly: true              //httpOnly -> can't be read by JS
+      httpOnly: true                  //httpOnly -> can't be read by JS
     }
   })
 );
 
+//------------    Custom Routers    -----------------//
 app.use(routes);
+// app.use('/routes/api/shows', showsApiRouter);
+// app.use('/routes/api/tickets', ticketsApiRouter);
+
 
 
 //------------ Server Error Handlers ----------------//
