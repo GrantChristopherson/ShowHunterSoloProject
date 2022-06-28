@@ -1,10 +1,13 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const showsRouter = require('./shows.js')
+const ticketsRouter = require('./tickets.js')
 
 router.use('/session', sessionRouter);
-
 router.use('/users', usersRouter);
+router.use('./shows.js', showsRouter);
+router.use('./tickets.js', ticketsRouter);
 
 ////---- POST /test used for testing restoreCSRF and other functionality
  
