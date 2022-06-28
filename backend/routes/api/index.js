@@ -6,14 +6,11 @@ const ticketsRouter = require('./tickets.js')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
-router.use('./shows.js', showsRouter);
-router.use('./tickets.js', ticketsRouter);
+router.use('/shows', showsRouter);
+router.use('/tickets', ticketsRouter);
 
 ////---- POST /test used for testing restoreCSRF and other functionality
  
-// router.post('/test', (req, res) => {
-//   res.json({ requestBody: req.body });
-// });
 
 
 //testers below for middleware utils/auth.js
@@ -51,3 +48,12 @@ router.use('./tickets.js', ticketsRouter);
 
 //---tester above
 module.exports = router;
+
+// const { requireAuth } = require('../../utils/auth.js');
+// router.get(
+//   '/require-auth',
+//   requireAuth,
+//   (req, res) => {
+//     return res.json(req.user);
+//   }
+// );
