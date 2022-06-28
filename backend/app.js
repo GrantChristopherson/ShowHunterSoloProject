@@ -34,15 +34,15 @@ app.use(          // helmet helps set a variety of headers to better secure your
   })
 );
 
-app.use(          // Set the _csrf token and create req.csrfToken method
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "Lax",
-      httpOnly: true                  //httpOnly -> can't be read by JS
-    }
-  })
-);
+// app.use(          // Set the _csrf token and create req.csrfToken method
+//   csurf({
+//     cookie: {
+//       secure: isProduction,
+//       sameSite: isProduction && "Lax",
+//       httpOnly: true                  //httpOnly -> can't be read by JS
+//     }
+//   })
+// );
 
 //------------    Custom Routers    -----------------//
 app.use(routes);

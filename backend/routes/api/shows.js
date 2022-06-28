@@ -44,11 +44,15 @@ const validateShow = [
 
 // Get All Shows   NOT TESTED YET!
 router.get('/', asyncHandler( async (req, res) => {
-  const shows = db.Shows.findAll({
-    //include: [{ model: Ticket, as: 'Tickets', }]
-    // order: [["createdAt", "DESC"]],
-    // attributes: ["bandName", "venue", "location", "showDate", "about"],
-  })
+  console.log(db)
+  const shows = await db.Show.findAll({
+    include: [{ 
+      model: db.Ticket,
+       as: 'Tickets', 
+      }],
+    order: [["createdAt", "DESC"]],
+    attributes: ["bandName", "venue", "location", "showDate", "about"],
+   })
 
   return res.json( shows )
 }))
@@ -56,14 +60,8 @@ router.get('/', asyncHandler( async (req, res) => {
 
 
 // Create a Show    NOT TESTED YET!
-router.post('/', requireAuth, validateShow, asyncHandler( async (req, res) => {
-  const {
-    bandName,
-    venue,
-    location,
-    showDate,
-    about
-  } = req.body;
+router.post('/', validateShow, asyncHandler( async (req, res) => {  //add requireAuth ??
+  const { bandName, venue, location, showDate, about, userId } = req.body;
 
   const show = await db.Show.create({ 
     bandName,
@@ -71,10 +69,11 @@ router.post('/', requireAuth, validateShow, asyncHandler( async (req, res) => {
     location,
     showDate,
     about,
-    showCreatorId: req.user.id
-  });
+    showCreatorId: userId
+  })
   return res.json( show )
 }))
+
 
 
 
