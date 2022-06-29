@@ -9,10 +9,11 @@ router.use('/users', usersRouter);
 router.use('/shows', showsRouter);
 router.use('/tickets', ticketsRouter);
 
+
+
+
 ////---- POST /test used for testing restoreCSRF and other functionality
  
-
-
 //testers below for middleware utils/auth.js
 
 // const asyncHandler = require('express-async-handler');
@@ -48,12 +49,3 @@ router.use('/tickets', ticketsRouter);
 
 //---tester above
 module.exports = router;
-
-// const { requireAuth } = require('../../utils/auth.js');
-// router.get(
-//   '/require-auth',
-//   requireAuth,
-//   (req, res) => {
-//     return res.json(req.user);
-//   }
-// );

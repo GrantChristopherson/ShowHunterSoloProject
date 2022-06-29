@@ -44,7 +44,6 @@ const validateShow = [
 
 // Get All Shows   NOT TESTED YET!
 router.get('/', asyncHandler( async (req, res) => {
-  console.log(db)
   const shows = await db.Show.findAll({
     include: [{ 
       model: db.Ticket,
